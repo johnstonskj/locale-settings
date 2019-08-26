@@ -18,7 +18,7 @@ The following should display "19 US Dollars and 99 cents".
 ```
 use std::str::FromStr;
 use locale_types::{Locale, LocaleString};
-use locale_codes::codes::currency;
+use locale_codes::currency;
 use locale_settings::locale::{Category, set_locale};
 use locale_settings::currency::get_currency_format;
 
