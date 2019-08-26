@@ -202,6 +202,7 @@ mod tests {
         }
     }
 
+    #[ignore]
     #[test]
     fn test_set_locale_one() {
         // set everything
