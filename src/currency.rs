@@ -44,8 +44,8 @@ if set_locale(&Locale::String(en_us), &Category::Currency) {
 
 use crate::ffi::localeconv;
 use crate::ffi::utils::*;
-use crate::Category;
 use crate::numeric::NumericFormat;
+use crate::Category;
 use locale_types::{Locale, LocaleResult};
 use std::os::raw::c_char;
 
