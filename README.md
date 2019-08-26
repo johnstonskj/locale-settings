@@ -30,6 +30,7 @@ different O/S bindings can be built effectively.
 
 ## History
 
+* **0.3.0** - reorganized module hierarchy.
 * **0.1.0** - extracted from [simple-locale](https://github.com/johnstonskj/simple-locale).
 
 ## TODO
