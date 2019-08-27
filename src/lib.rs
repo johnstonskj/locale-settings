@@ -95,10 +95,15 @@ extended API, specifically
 for a locale other than the current.
 */
 
+#![warn(
+    missing_debug_implementations,
+    missing_docs,
+    unused_extern_crates,
+    rust_2018_idioms
+)]
+
 #[macro_use]
 extern crate log;
-extern crate locale_types;
-extern crate regex;
 
 // ------------------------------------------------------------------------------------------------
 // Public Modules
