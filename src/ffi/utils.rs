@@ -56,30 +56,31 @@ pub fn get_format_for_locale<T>(
     get_format: &dyn Fn() -> T,
     inherit_current: bool,
 ) -> LocaleResult<T> {
-    let os_loc = unsafe {
+    let old_loc = unsafe {
         let null_loc: locale_t = ptr::null_mut();
+        let old_loc = uselocale(null_loc);
         let curr_loc = match inherit_current {
-            true => uselocale(null_loc),
+            true => old_loc,
             false => null_loc,
         };
         debug!(
             "newlocale({:?}, {:#?}, {} [{:?}])",
             category, locale, inherit_current, curr_loc
         );
-        let os_loc = newlocale(
+        let temp_loc = newlocale(
             category.to_os_mask() as i32,
             locale.to_string().as_ptr() as *const i8,
             curr_loc,
         );
-        if os_loc == null_loc {
+        if temp_loc == null_loc {
             warn!("newlocale returned null");
             return Err(LocaleError::OSError);
         }
-        uselocale(os_loc)
+        uselocale(temp_loc)
     };
     let format = get_format();
     unsafe {
-        freelocale(os_loc);
+        freelocale(old_loc);
     }
     Ok(format)
 }

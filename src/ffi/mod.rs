@@ -31,12 +31,14 @@ mod _macos {
     };
 
     pub use super::macos::xlocale::{
-        ___mb_cur_max, duplocale, freelocale, locale_t, newlocale, uselocale,
+        ___mb_cur_max, duplocale, freelocale, locale_t, newlocale, uselocale, querylocale,
     };
     pub use super::macos::xlocale::{
         LC_COLLATE_MASK, LC_CTYPE_MASK, LC_MESSAGES_MASK, LC_MONETARY_MASK, LC_NUMERIC_MASK,
         LC_TIME_MASK,
     };
+    pub const LC_ALL_MASK: u32 = LC_COLLATE_MASK | LC_CTYPE_MASK | LC_MESSAGES_MASK |
+        LC_MONETARY_MASK | LC_NUMERIC_MASK | LC_TIME_MASK;
 }
 #[cfg(target_os = "macos")]
 pub(crate) use _macos::*;
@@ -45,6 +47,8 @@ pub(crate) use _macos::*;
 mod linux;
 #[cfg(target_os = "linux")]
 mod _linux {
+    use std::ptr;
+
     pub use super::linux::langinfo::{nl_item, nl_langinfo};
     pub use super::linux::langinfo::{
         ABDAY_1, ABDAY_2, ABDAY_3, ABDAY_4, ABDAY_5, ABDAY_6, ABDAY_7, ABMON_1, ABMON_10, ABMON_11,
@@ -60,7 +64,7 @@ mod _linux {
     };
 
     pub use super::linux::locale::{
-        LC_ALL, LC_COLLATE, LC_COLLATE_MASK, LC_CTYPE, LC_CTYPE_MASK, LC_MESSAGES,
+        LC_ALL, LC_ALL_MASK, LC_COLLATE, LC_COLLATE_MASK, LC_CTYPE, LC_CTYPE_MASK, LC_MESSAGES,
         LC_MESSAGES_MASK, LC_MONETARY, LC_MONETARY_MASK, LC_NUMERIC, LC_NUMERIC_MASK, LC_TIME,
         LC_TIME_MASK,
     };
@@ -70,6 +74,14 @@ mod _linux {
     }
     #[allow(non_upper_case_globals)]
     pub const ___mb_cur_max: unsafe extern "C" fn() -> usize = __ctype_get_mb_cur_max;
+
+    pub fn querylocale(
+        arg1: ::std::os::raw::c_int,
+        arg2: locale_t,
+    ) -> *const ::std::os::raw::c_char {
+        ptr::null()
+    }
+
 }
 #[cfg(target_os = "linux")]
 pub(crate) use _linux::*;
