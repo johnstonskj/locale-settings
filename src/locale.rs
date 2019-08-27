@@ -146,12 +146,9 @@ fn set_locale_wrapper(category: i32, new_locale_str: &str) -> bool {
         let new_locale = newlocale(category, new_locale_str.as_ptr() as *const i8, curr_locale);
         match uselocale(new_locale) {
             QUERY_LOCALE => {
-                debug!(
-                    "setlocale({}, {:#?}) returned null",
-                    category, new_locale
-                );
+                debug!("setlocale({}, {:#?}) returned null", category, new_locale);
                 false
-            },
+            }
             _ => {
                 debug!(
                     "setlocale({}, {:#?}) returned success",
@@ -160,7 +157,7 @@ fn set_locale_wrapper(category: i32, new_locale_str: &str) -> bool {
                 freelocale(curr_locale);
                 freelocale(new_locale);
                 true
-            },
+            }
         }
     }
 }

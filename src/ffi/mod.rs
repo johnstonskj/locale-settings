@@ -31,14 +31,18 @@ mod _macos {
     };
 
     pub use super::macos::xlocale::{
-        ___mb_cur_max, duplocale, freelocale, locale_t, newlocale, uselocale, querylocale,
+        ___mb_cur_max, duplocale, freelocale, locale_t, newlocale, querylocale, uselocale,
     };
     pub use super::macos::xlocale::{
         LC_COLLATE_MASK, LC_CTYPE_MASK, LC_MESSAGES_MASK, LC_MONETARY_MASK, LC_NUMERIC_MASK,
         LC_TIME_MASK,
     };
-    pub const LC_ALL_MASK: u32 = LC_COLLATE_MASK | LC_CTYPE_MASK | LC_MESSAGES_MASK |
-        LC_MONETARY_MASK | LC_NUMERIC_MASK | LC_TIME_MASK;
+    pub const LC_ALL_MASK: u32 = LC_COLLATE_MASK
+        | LC_CTYPE_MASK
+        | LC_MESSAGES_MASK
+        | LC_MONETARY_MASK
+        | LC_NUMERIC_MASK
+        | LC_TIME_MASK;
 }
 #[cfg(target_os = "macos")]
 pub(crate) use _macos::*;
