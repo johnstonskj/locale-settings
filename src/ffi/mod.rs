@@ -85,7 +85,6 @@ mod _linux {
     ) -> *const ::std::os::raw::c_char {
         ptr::null()
     }
-
 }
 #[cfg(target_os = "linux")]
 pub(crate) use _linux::*;
